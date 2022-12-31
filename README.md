@@ -22,7 +22,6 @@ const client = new KoreanbotsClient(
   },
   {
     api: {
-      version: 2,
       token: '당신의 봇의 한디리 토큰',
     },
     updateInterval: 600000,
@@ -44,7 +43,6 @@ const client = new Client({
 
 const krBots = new Koreanbots({
   api: {
-    version: 2,
     token: '당신의 봇의 한디리 토큰',
   },
   clientId: '당신의 봇의 아이디',
@@ -52,10 +50,12 @@ const krBots = new Koreanbots({
 
 client.on('ready', () => {
   const update = () =>
-    krbots.myBot.update({
-      servers: client.guilds.cache.size,
-      shards: client.shard?.count,
-    })
+    krbots.myBot
+      .update({
+        servers: client.guilds.cache.size,
+        shards: client.shard?.count,
+      })
+      .then(res => console.log(JSON.stringify(res)))
   update()
   setInterval(update, 600000)
 })
