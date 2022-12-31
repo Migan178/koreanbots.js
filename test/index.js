@@ -1,18 +1,14 @@
-const { KoreanbotsClient } = require('..')
-const { GatewayIntentBits } = require('discord.js')
-const { KR_TOKEN, DISCORD_TOKEN } = require('./config.json')
+const { Koreanbots } = require('..')
+const { KR_TOKEN, CLIENT_ID } = require('./config.json')
 
-const client = new KoreanbotsClient(
-  {
-    intents: [GatewayIntentBits.Guilds],
+const client = new Koreanbots({
+  api: {
+    token: KR_TOKEN,
+    version: 2,
   },
-  {
-    api: {
-      version: 2,
-      token: KR_TOKEN,
-    },
-    updateInterval: 600000,
-  }
-)
+  clientId: CLIENT_ID,
+})
 
-client.login(DISCORD_TOKEN)
+client.myBot
+  .checkVotes('415135882006495242')
+  .then(res => console.log(JSON.stringify(res)))

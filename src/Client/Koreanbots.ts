@@ -1,6 +1,13 @@
-import { type KoreanbotsOptions } from '../types'
+import type {
+  BotListsResponse,
+  CheckBotVotesResponse,
+  GetBotResponse,
+  KoreanbotsOptions,
+  ListType,
+  UpdateBotResponse,
+} from '../types'
 import { RestClient } from '../rest'
-import { Snowflake } from 'discord.js'
+import { type Snowflake } from 'discord.js'
 import { Routes } from '../rest/Routes'
 import { MyBot } from './MyBot'
 
@@ -10,12 +17,13 @@ export class Koreanbots {
   public myBot: MyBot
   public constructor(options: KoreanbotsOptions) {
     this.options = options
-    this.rest = new RestClient(options.api.version)
+    this.rest = new RestClient()
     this.myBot = new MyBot(this)
   }
 
-  public async getBot(id: Snowflake) {
-    this.rest.sendGet(new Routes().bots.getBot(id))
+  public async getBot(id: Snowflake): Promise<GetBotResponse> {
+    const a = await this.rest.sendGet(new Routes().bots.getBot(id))
+    return a.body.json()
   }
 
   public async updateBot(
@@ -25,12 +33,48 @@ export class Koreanbots {
       shards?: number
       token: string
     }
-  ) {
-    this.rest.sendPost(
+  ): Promise<UpdateBotResponse> {
+    const a = await this.rest.sendPost(
       new Routes().bots.updateBot(this.options.clientId, {
         body: { servers: options.servers, shards: options.shards || 0 },
         token: options.token,
       })
     )
+    return a.body.json()
+  }
+
+  public async searchBots(
+    query: string,
+    pages?: number
+  ): Promise<BotListsResponse> {
+    const a = await this.rest.sendGet(
+      new Routes().bots.searchBots(query, pages)
+    )
+    return a.body.json()
+  }
+
+  public async botLists(
+    listType: ListType,
+    pages?: number
+  ): Promise<BotListsResponse> {
+    const a = await this.rest.sendGet(
+      new Routes().bots.botLists(listType, pages)
+    )
+    return a.body.json()
+  }
+
+  public async checkBotVotes(options: {
+    botId: Snowflake
+    userId: Snowflake
+    token: string
+  }): Promise<CheckBotVotesResponse> {
+    const a = await this.rest.sendGet(
+      new Routes().bots.checkBotVotes(
+        options.botId,
+        options.userId,
+        options.token
+      )
+    )
+    return a.body.json()
   }
 }
