@@ -5,6 +5,11 @@ import type {
   BotCategory,
   BotStatus,
   BotState,
+  ServerCategory,
+  ServerEmoji,
+  ServerState,
+  Library,
+  ServerFlags,
 } from '.'
 import type { Snowflake } from 'discord.js'
 
@@ -13,9 +18,9 @@ export interface GetBotResponseData {
   name: string
   tag: string
   avatar?: string
-  owners: GetUsersResponse[]
+  owners: GetUsersResponseData[]
   flags: BotFlags
-  lib: string
+  lib: Library
   prefix: string
   votes: number
   servers?: number
@@ -34,13 +39,19 @@ export interface GetBotResponseData {
   state?: BotState
 }
 
-export interface GetUsersResponse {
+export interface GetUsersResponseData {
   id: Snowflake
   flags: UserFlags
   github?: string
   tag: string
   username: string
-  bots: string[]
+  bots: (string | GetBotResponseData)[]
+  servers: (string | GetServerResponseData)[]
+}
+
+export interface GetUsersResponse extends BaseResponse {
+  data?: GetUsersResponseData
+  message?: string
 }
 
 export interface BaseResponse {
@@ -72,5 +83,30 @@ export interface CheckBotVotesResponse extends BaseResponse {
     voted: boolean
     lastVote: number
   }
+  message?: string
+}
+
+export interface GetServerResponseData {
+  id: Snowflake
+  name: string
+  icon?: string
+  owner: GetUsersResponse
+  flags: ServerFlags
+  votes: number
+  members: number
+  boostTier: number
+  intro: string
+  desc: string
+  category: ServerCategory[]
+  invite: string
+  emojis: ServerEmoji[]
+  vanity?: string
+  bg?: string
+  banner?: string
+  state: ServerState
+}
+
+export interface GetServerResponse extends BaseResponse {
+  data?: GetServerResponseData
   message?: string
 }

@@ -1,6 +1,10 @@
 import type { Koreanbots } from './Koreanbots'
-import type { CheckBotVotesResponse, UpdateBotResponse } from '../types'
-import { Snowflake } from 'discord.js'
+import type {
+  CheckBotVotesResponse,
+  GetBotResponse,
+  UpdateBotResponse,
+} from '../types'
+import type { Snowflake } from 'discord.js'
 
 export class MyBot {
   private koreanbots: Koreanbots
@@ -8,23 +12,26 @@ export class MyBot {
     this.koreanbots = koreanbots
   }
 
-  public async get() {
-    return await this.koreanbots.getBot(this.koreanbots.options.clientId)
+  public async get(): Promise<GetBotResponse> {
+    return await this.koreanbots.bot.getBot(this.koreanbots.options.clientId)
   }
 
   public async update(options: {
     servers: number
     shards?: number
   }): Promise<UpdateBotResponse> {
-    return await this.koreanbots.updateBot(this.koreanbots.options.clientId, {
-      servers: options.servers,
-      shards: options.shards || 1,
-      token: this.koreanbots.options.api.token,
-    })
+    return await this.koreanbots.bot.updateBot(
+      this.koreanbots.options.clientId,
+      {
+        servers: options.servers,
+        shards: options.shards || 1,
+        token: this.koreanbots.options.api.token,
+      }
+    )
   }
 
   public async checkVotes(userId: Snowflake): Promise<CheckBotVotesResponse> {
-    return await this.koreanbots.checkBotVotes({
+    return await this.koreanbots.bot.checkBotVotes({
       botId: this.koreanbots.options.clientId,
       userId,
       token: this.koreanbots.options.api.token,

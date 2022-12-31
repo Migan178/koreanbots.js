@@ -9,6 +9,4 @@ const client = new Koreanbots({
   clientId: CLIENT_ID,
 })
 
-client.myBot
-  .checkVotes('415135882006495242')
-  .then(res => console.log(JSON.stringify(res)))
+client.user.getUser().then(res => console.log(JSON.stringify(res)))

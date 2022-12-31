@@ -50,4 +50,20 @@ export class Routes {
       }
     },
   }
+
+  public readonly user = {
+    getUser(id: Snowflake): RoutesInfo {
+      return {
+        url: `/users/${id}`,
+      }
+    },
+  }
+
+  public readonly server = {
+    getServer(id: Snowflake): RoutesInfo {
+      return {
+        url: `/servers/${id}`,
+      }
+    },
+  }
 }

@@ -35,9 +35,9 @@ export * from './ApiResponse'
 export enum BotFlags {
   None = 0 << 0,
   Official = 1 << 0,
-  KrBotsOfficial = 1 << 2,
+  KrBotsVerified = 1 << 2,
   Partner = 1 << 3,
-  Verified = 1 << 4,
+  DiscordVerified = 1 << 4,
   Premium = 1 << 5,
   HackathonBot = 1 << 6,
 }
@@ -78,3 +78,59 @@ export type BotStatus = 'online' | 'idle' | 'dnd' | 'streaming' | 'offline'
 export type BotState = 'ok' | 'reported' | 'blocked' | 'private' | 'archived'
 
 export type ListType = 'new' | 'votes'
+
+export enum ServerFlags {
+  None = 0 << 0,
+  Official = 1 << 0,
+  KrBotsVerified = 1 << 2,
+  KrBotsPartner = 1 << 3,
+  DiscordVerified = 1 << 4,
+  DiscordPartner = 1 << 5,
+}
+
+export type ServerCategory =
+  | '커뮤니티'
+  | 'IT & 과학'
+  | '봇'
+  | '친목'
+  | '음악'
+  | '교육'
+  | '연애'
+  | '게임'
+  | '오버워치'
+  | '리그 오브 레전드'
+  | '배틀그라운드'
+  | '마인크래프트'
+
+export interface ServerEmoji {
+  id: Snowflake
+  name: string
+  url: string
+}
+
+export type ServerState = 'ok' | 'reported' | 'blocked' | 'unreachable'
+
+export type Library =
+  | 'discord.js'
+  | 'Eris'
+  | 'discord.py'
+  | 'discordcr'
+  | 'Nyxx'
+  | 'Discord.Net'
+  | 'DSharpPlus'
+  | 'Nostrum'
+  | 'coxir'
+  | 'DiscordGo'
+  | 'Discord4J'
+  | 'Javacord'
+  | 'JDA'
+  | 'Discordia'
+  | 'RestCord'
+  | 'Yasmin'
+  | 'disco'
+  | 'discordrb'
+  | 'serenity'
+  | 'SwiftDiscord'
+  | 'Sword'
+  | '기타'
+  | '비공개'

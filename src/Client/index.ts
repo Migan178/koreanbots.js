@@ -1,2 +1,6 @@
 export * from './KoreanbotsClient'
 export * from './Koreanbots'
+export * from './MyBot'
+export * from './Bot'
+export * from './Base'
+export * from './User'
