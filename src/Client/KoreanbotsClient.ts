@@ -15,7 +15,9 @@ export class KoreanbotsClient extends Client {
       !koreanbotsOptions.updateInterval ||
       isNaN(koreanbotsOptions.updateInterval)
     )
-      throw new TypeError(`updateInterval 값의 타입은 숫자여야 합니다.`)
+      throw new TypeError(
+        `updateInterval 값의 타입은 숫자여야 합니다. 받은 타입: ${typeof koreanbotsOptions.updateInterval}`
+      )
     this.koreanbots = null
     this.on(Events.ClientReady, () => {
       this.koreanbots = new Koreanbots({
@@ -26,7 +28,7 @@ export class KoreanbotsClient extends Client {
         this.koreanbots!.myBot.update({
           servers: this.guilds.cache.size,
           shards: this.shard?.count,
-        }).then(res => console.log(res))
+        }).then(res => console.log(res.message))
       a()
       setInterval(a, this.koreanbotsOptions.updateInterval)
     })

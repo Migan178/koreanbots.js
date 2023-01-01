@@ -1,4 +1,4 @@
-import { Koreanbots } from './Koreanbots'
+import type { Koreanbots } from './Koreanbots'
 import type { Snowflake } from 'discord.js'
 import type {
   BotListsResponse,

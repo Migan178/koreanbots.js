@@ -134,3 +134,7 @@ export type Library =
   | 'Sword'
   | '기타'
   | '비공개'
+
+export type BotWidgetType = 'votes' | 'servers' | 'status'
+
+export type ServerWidgetType = 'votes' | 'members' | 'boost'

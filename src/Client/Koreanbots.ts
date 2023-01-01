@@ -4,6 +4,7 @@ import { MyBot } from './MyBot'
 import { Bot } from './Bot'
 import { User } from './User'
 import { Server } from './Server'
+import { Widget } from './Widget'
 
 export class Koreanbots {
   public readonly options: KoreanbotsOptions
@@ -12,6 +13,7 @@ export class Koreanbots {
   public readonly bot: Bot
   public readonly user: User
   public readonly server: Server
+  public readonly widget: Widget
   public constructor(options: KoreanbotsOptions) {
     this.options = options
     this.rest = new RestClient()
@@ -19,5 +21,6 @@ export class Koreanbots {
     this.bot = new Bot(this)
     this.user = new User(this)
     this.server = new Server(this)
+    this.widget = new Widget(this)
   }
 }
