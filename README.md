@@ -62,3 +62,15 @@ client.on('ready', () => {
 
 client.login('당신의 봇의 토큰')
 ```
+
+#### (베타) 웹훅
+
+웹훅 기능은 아직 정식 출시가 안되었습니다.
+
+```js
+const { KoreanbotsWebhook } = require('@migan/koreanbots')
+
+new KoreanbotsWebhook(port, body => {
+  console.log(JSON.stringify(body))
+}).init()
+```

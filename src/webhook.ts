@@ -1,29 +1,32 @@
 import express = require('express')
-import { BotWebhookData, ServerWebhookData } from './types/index.js'
+import { BotWebhookData, ServerWebhookData } from './types'
 
 const app = express()
 app.use(express.json())
 
 export class KoreanbotsWebhook {
+  #callback: (body: ServerWebhookData | BotWebhookData) => any
+  #port: number
   public constructor(
-    public readonly port: number,
-    public readonly callback: (body: ServerWebhookData | BotWebhookData) => any
+    port: number,
+    callback: (body: ServerWebhookData | BotWebhookData) => any
   ) {
-    if (!port) this.port = 80
+    if (!port)
+      throw new TypeError(
+        `"port" 값의 타입은 숫자여야 합니다. 받은 타입: ${typeof port}`
+      )
+    else this.#port = port
+    this.#callback = callback
   }
 
   public init() {
     app.get('/', (req, res) => {
       res.json({ secret: req.query.secret })
-      console.log(req.query.secret)
     })
     app.post('/', (req, res) => {
-      this.callback(req.body)
-      console.log(req.headers)
+      this.#callback(req.body)
       res.send()
     })
-    app.listen(this.port, () =>
-      console.log('[Koreanbots] Webhook port: ' + this.port)
-    )
+    app.listen(this.#port)
   }
 }
