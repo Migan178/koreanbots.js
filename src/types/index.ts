@@ -138,3 +138,22 @@ export type Library =
 export type BotWidgetType = 'votes' | 'servers' | 'status'
 
 export type ServerWidgetType = 'votes' | 'members' | 'boost'
+
+export interface WebhookData<T> {
+  type: 0 | 1
+  before?: number
+  after: number
+  userId: T
+}
+
+export interface BotWebhookData {
+  type: 'bot'
+  botId: Snowflake
+  data: WebhookData<null>
+}
+
+export interface ServerWebhookData {
+  type: 'server'
+  serverId: Snowflake
+  data: WebhookData<Snowflake>
+}

@@ -7,15 +7,14 @@ import { Server } from './Server'
 import { Widget } from './Widget'
 
 export class Koreanbots {
-  public readonly options: KoreanbotsOptions
   public readonly rest: RestClient
   public readonly myBot: MyBot
   public readonly bot: Bot
   public readonly user: User
   public readonly server: Server
   public readonly widget: Widget
-  public constructor(options: KoreanbotsOptions) {
-    this.options = options
+
+  public constructor(public readonly options: KoreanbotsOptions) {
     this.rest = new RestClient()
     this.myBot = new MyBot(this)
     this.bot = new Bot(this)
