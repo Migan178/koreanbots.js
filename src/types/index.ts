@@ -139,21 +139,23 @@ export type BotWidgetType = 'votes' | 'servers' | 'status'
 
 export type ServerWidgetType = 'votes' | 'members' | 'boost'
 
-export interface WebhookData<T> {
+export interface WebhookData {
+  type: 'bot' | 'server'
+  data: WebhookBotData | WebhookGuildData
+  timestamp: string
+}
+
+export interface WebhookBotData {
   type: 0 | 1
+  botId: Snowflake
   before?: number
   after: number
-  userId: T
+  userId?: Snowflake
 }
 
-export interface BotWebhookData {
-  type: 'bot'
-  botId: Snowflake
-  data: WebhookData<null>
-}
-
-export interface ServerWebhookData {
-  type: 'server'
-  serverId: Snowflake
-  data: WebhookData<Snowflake>
+export interface WebhookGuildData {
+  type: 0 | 1
+  guildId: Snowflake
+  before?: number
+  after: number
 }
