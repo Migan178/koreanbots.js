@@ -142,7 +142,7 @@ export type ServerWidgetType = 'votes' | 'members' | 'boost'
 export interface WebhookData {
   type: 'bot' | 'server'
   data: WebhookBotData | WebhookGuildData
-  timestamp: string
+  timestamp: number
 }
 
 export interface WebhookBotData {
