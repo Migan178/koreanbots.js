@@ -159,3 +159,8 @@ export interface WebhookGuildData {
   before?: number
   after: number
 }
+
+export interface WebhookOptions {
+  port: number
+  verifyWebhook?: boolean
+}

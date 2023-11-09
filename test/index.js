@@ -1,5 +1,11 @@
 const { KoreanbotsWebhook } = require('..')
 
-new KoreanbotsWebhook(1234, body => {
-  console.log(body)
-}).init()
+new KoreanbotsWebhook(
+  {
+    port: 1234,
+    verifyWebhook: false,
+  },
+  body => {
+    console.log(body)
+  }
+).init()

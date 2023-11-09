@@ -1,7 +1,7 @@
 {
   "name": "@migan/koreanbots",
   "description": "not official koreanbots sdk",
-  "version": "1.2.0-dev.0",
+  "version": "1.2.0",
   "license": "MIT",
   "files": [
     "dist"
