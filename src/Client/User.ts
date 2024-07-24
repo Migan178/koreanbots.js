@@ -10,7 +10,7 @@ export class User extends Base {
   }
 
   public async getUser(id: Snowflake): Promise<GetUsersResponse> {
-    const a = await this.rest.sendGet(new Routes().user.getUser(id))
-    return a.body.json()
+    const res = await this.rest.sendGet(new Routes().user.getUser(id))
+    return res.body.json()
   }
 }

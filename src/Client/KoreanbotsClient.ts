@@ -24,13 +24,13 @@ export class KoreanbotsClient extends Client {
         api: koreanbotsOptions.api,
         clientId: this.user!.id,
       })
-      const a = () =>
+      const update = () =>
         this.koreanbots!.myBot.update({
           servers: this.guilds.cache.size,
           shards: this.shard?.count,
         }).then(res => console.log(res.message))
-      a()
-      setInterval(a, this.koreanbotsOptions.updateInterval)
+      update()
+      setInterval(update, this.koreanbotsOptions.updateInterval)
     })
   }
 }

@@ -10,7 +10,7 @@ export class Server extends Base {
   }
 
   public async getServer(id: Snowflake): Promise<GetServerResponse> {
-    const a = await this.rest.sendGet(new Routes().server.getServer(id))
-    return a.body.json()
+    const res = await this.rest.sendGet(new Routes().server.getServer(id))
+    return res.body.json()
   }
 }

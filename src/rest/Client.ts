@@ -9,26 +9,26 @@ export class RestClient {
   }
 
   public async sendGet(routes: RoutesInfo) {
-    const a = await request(`${this.url}${routes.url}`, {
+    const res = await request(`${this.url}${routes.url}`, {
       method: 'GET',
       headers: { ...routes.headers, 'Content-Type': 'application/json' },
       query: routes.query,
     })
 
-    if (a.statusCode !== 200)
-      throw new KoreanbotsAPIError(`${JSON.stringify(await a.body.json())}`)
-    return a
+    if (res.statusCode !== 200)
+      throw new KoreanbotsAPIError(`${JSON.stringify(await res.body.json())}`)
+    return res
   }
   public async sendPost(routes: RoutesInfo) {
-    const a = await request(`${this.url}${routes.url}`, {
+    const res = await request(`${this.url}${routes.url}`, {
       method: 'POST',
       headers: { ...routes.headers, 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...routes.body }),
       query: routes.query,
     })
 
-    if (a.statusCode !== 200)
-      throw new KoreanbotsAPIError(`${JSON.stringify(await a.body.json())}`)
-    return a
+    if (res.statusCode !== 200)
+      throw new KoreanbotsAPIError(`${JSON.stringify(await res.body.json())}`)
+    return res
   }
 }
