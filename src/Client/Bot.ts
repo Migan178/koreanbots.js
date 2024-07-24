@@ -29,8 +29,11 @@ export class Bot extends Base {
     }
   ): Promise<UpdateBotResponse> {
     const res = await this.rest.sendPost(
-      new Routes().bots.updateBot(this.options.clientId, {
-        body: { servers: options.servers, shards: options.shards || 0 },
+      new Routes().bots.updateBot(id, {
+        body: {
+          servers: options.servers,
+          shards: options.shards || 1,
+        },
         token: options.token,
       })
     )
